@@ -45,8 +45,8 @@ export default function ExploreSeasides() {
     <section className="max-w-6xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-2xl font-bold mb-2">Explore the world's most stunning seasides</h2>
-          <p className="text-gray-600">2023's Travelers' Choice Awards Best of the Best Beaches</p>
+          <h2 className="text-2xl font-bold mb-2">Explore the world&apos;s most stunning seasides</h2>
+          <p className="text-gray-600">2023&apos;s Travelers&apos; Choice Awards Best of the Best Beaches</p>
         </div>
         <button className="text-[#34E0A1] hover:text-black transition-colors flex items-center gap-1 font-medium">
           See all

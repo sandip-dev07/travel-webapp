@@ -72,7 +72,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#" className="text-xs text-gray-600 hover:underline">
-                  Travelers' Choice
+                  Travelers&apos; Choice
                 </Link>
               </li>
               <li>

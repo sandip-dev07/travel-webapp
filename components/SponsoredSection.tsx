@@ -21,7 +21,7 @@ export default function SponsoredSection() {
                 Sponsored by <span className="font-bold">CESAR®</span>
               </span>
             </div>
-            <h2 className="text-2xl font-bold mb-2">It's easier than ever to go together</h2>
+            <h2 className="text-2xl font-bold mb-2">It&apos;s easier than ever to go together</h2>
             <p className="text-sm mb-6">
               Travel is better when you can share it with your best friend. Find all the tips, guides, and tools you
               need to take a dream trip with your dog.

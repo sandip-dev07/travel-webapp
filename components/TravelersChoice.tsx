@@ -9,7 +9,7 @@ export default function TravelersChoice() {
             <div className="bg-yellow-500 rounded-full p-2 mr-2">
               <Image src="/tripadvisor-icon-gold.png" alt="Award" width={24} height={24} />
             </div>
-            <h2 className="text-2xl font-bold">Travelers' Choice</h2>
+            <h2 className="text-2xl font-bold">Travelers&apos; Choice</h2>
           </div>
           <h3 className="text-2xl font-bold mb-4">Awards Best of the Best</h3>
           <p className="text-sm mb-6">Among our top 1% of places, stays, eats, and experiences—decided by you.</p>
