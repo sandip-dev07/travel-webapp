@@ -2,27 +2,41 @@ import Image from "next/image"
 
 export default function TravelersChoice() {
   return (
-    <section className="bg-[#fff8e7] py-12 mb-12">
-      <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center">
-        <div className="md:w-1/2 mb-6 md:mb-0">
-          <div className="flex items-center mb-2">
-            <div className="bg-yellow-500 rounded-full p-2 mr-2">
-              <Image src="/tripadvisor-icon-gold.png" alt="Award" width={24} height={24} />
+    <section className="bg-[#fff8e7] py-16 mb-12">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center gap-8">
+          <div className="md:w-1/2">
+            <div className="p-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-yellow-500 rounded-full p-3 mr-4">
+                  <Image src="/logo-award.svg" alt="Award" width={48} height={48} />
+                </div>
+                <h2 className="text-3xl font-bold">Travelers' Choice</h2>
+              </div>
+              <div className="space-y-6">
+                <h3 className="text-6xl font-bold leading-tight">
+                  Awards Best of <br /> the Best
+                </h3>
+                <p className="text-lg text-gray-700">
+                  Among our top 1% of places, stays, eats, and experiences—decided by you.
+                </p>
+                <button className="bg-black text-white text-base px-8 py-4 rounded-full hover:bg-gray-800 transition-colors">
+                  See the winners
+                </button>
+              </div>
             </div>
-            <h2 className="text-2xl font-bold">Travelers' Choice</h2>
           </div>
-          <h3 className="text-2xl font-bold mb-4">Awards Best of the Best</h3>
-          <p className="text-sm mb-6">Among our top 1% of places, stays, eats, and experiences—decided by you.</p>
-          <button className="bg-black text-white text-sm px-4 py-2 rounded-full">See the winners</button>
-        </div>
-        <div className="md:w-1/2">
-          <Image
-            src="/travelers-choice.jpg"
-            alt="Travelers Choice"
-            width={500}
-            height={300}
-            className="w-full h-auto"
-          />
+          <div className="md:w-1/2">
+            <div className="p-8">
+              <Image
+                src="/award.jpg"
+                alt="Travelers Choice"
+                width={600}
+                height={400}
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

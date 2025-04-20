@@ -35,7 +35,7 @@ export default function DreamNextTrip() {
           {destinations.map((destination, index) => (
             <div key={index} className="min-w-[220px] relative group cursor-pointer">
               <Image
-                src={destination.image || "/placeholder.svg"}
+                src={destination.image || "/offraod-race.jpg"}
                 alt={destination.name}
                 width={220}
                 height={150}
