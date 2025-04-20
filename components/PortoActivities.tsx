@@ -1,10 +1,14 @@
+"use client"
+
 import Image from "next/image"
 import { Heart, ChevronRight, ChevronLeft, Star } from "lucide-react"
+import { Skeleton } from "./ui/skeleton"
+import { useState } from "react"
 
 const portoActivities = [
   {
     title: "Porto PRIVATE TOUR With Locals: Highlights & Hidden Gems",
-    image: "/porto-1.jpg",
+    image: "/food and drink.jpg",
     rating: 4.5,
     reviews: 541,
     price: 88,
@@ -14,7 +18,7 @@ const portoActivities = [
   },
   {
     title: "Porto: Private tour in the Douro (1 to 4 people) on a boat just for you",
-    image: "/porto-2.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/boat.jpg?updatedAt=1745140059848",
     rating: 5.0,
     reviews: 271,
     price: 80,
@@ -24,7 +28,7 @@ const portoActivities = [
   },
   {
     title: "Authentic Food and Wine Tour in Porto by Food Lover Tour",
-    image: "/porto-3.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/private%20tour.jpg?updatedAt=1745140163853",
     rating: 5.0,
     reviews: 582,
     price: 85,
@@ -35,23 +39,45 @@ const portoActivities = [
   },
   {
     title: "Lidador Tower",
-    image: "/porto-4.jpg",
+    image: "/attraction.jpg",
     rating: 4.4,
     reviews: 128,
     subtitle: "Architectural Buildings",
     bestSeller: false,
     category: "Attraction",
   },
+  {
+    title: "Porto: Private tour in the Douro (1 to 4 people) on a boat just for you",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/boat.jpg?updatedAt=1745140059848",
+    rating: 5.0,
+    reviews: 271,
+    price: 80,
+    currency: "$",
+    bestSeller: true,
+    category: "Boat Tour",
+  },
+  {
+    title: "Porto: Private tour in the Douro (1 to 4 people) on a boat just for you",
+    image: "/boat.jpg",
+    rating: 5.0,
+    reviews: 271,
+    price: 80,
+    currency: "$",
+    bestSeller: true,
+    category: "Boat Tour",
+  },
 ]
 
 export default function PortoActivities() {
+  const [loadedImages, setLoadedImages] = useState<{ [key: string]: boolean }>({})
+
   return (
     <section className="max-w-6xl mx-auto px-4 mb-12">
       <h2 className="text-xl font-bold mb-1">You might like these</h2>
       <p className="text-sm text-gray-600 mb-4">More things to do in Porto</p>
 
       <div className="relative">
-        <div className="flex space-x-5 overflow-x-auto pb-6 -mx-2 px-2">
+        <div className="flex space-x-5 overflow-x-auto pb-6 -mx-2 px-2 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           {portoActivities.map((activity, index) => (
             <div
               key={index}
@@ -59,12 +85,18 @@ export default function PortoActivities() {
             >
               <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="relative">
+                  {!loadedImages[activity.image] && (
+                    <Skeleton className="w-full h-[180px] rounded-none" />
+                  )}
                   <Image
                     src={activity.image || "/placeholder.svg"}
                     alt={activity.title}
                     width={250}
                     height={180}
-                    className="w-full h-[180px] object-cover"
+                    className={`w-full h-[180px] object-cover transition-opacity duration-300 ${
+                      loadedImages[activity.image] ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoadingComplete={() => setLoadedImages(prev => ({ ...prev, [activity.image]: true }))}
                   />
                   <button className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-110">
                     <Heart className="h-4 w-4 text-gray-500 group-hover:text-gray-700" />
@@ -105,7 +137,7 @@ export default function PortoActivities() {
 
                   {activity.price && (
                     <div className="flex items-center justify-between">
-                      <p className="text-xs text-gray-500">from</p>
+                      {/* <p className="text-xs text-gray-500">from</p> */}
                       <p className="text-base font-bold">
                         {activity.currency}
                         {activity.price}

@@ -1,30 +1,35 @@
+"use client"
 import Image from "next/image"
 import { ChevronRight } from "lucide-react"
+import { Skeleton } from "./ui/skeleton"
+import { useState } from "react"
 
 const seasideDestinations = [
   {
     region: "World",
-    image: "/beach-1.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/nature-landscape-with-starry-clear-sky.jpg?updatedAt=1745140165789",
     description: "Grace Bay, Providenciales, Turks and Caicos",
   },
   {
     region: "Europe",
-    image: "/beach-4.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/nature-landscape-with-starry-clear-sky.jpg?updatedAt=1745140165789",
     description: "Spiaggia dei Conigli, Lampedusa, Italy",
   },
   {
     region: "Asia",
-    image: "/beach-3.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/nature-landscape-with-starry-clear-sky.jpg?updatedAt=1745140165789",
     description: "Maya Bay, Ko Phi Phi, Thailand",
   },
   {
     region: "South Pacific",
-    image: "/beach-4.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/nature-landscape-with-starry-clear-sky.jpg?updatedAt=1745140165789",
     description: "Bondi Beach, Sydney, Australia",
   },
 ]
 
 export default function ExploreSeasides() {
+  const [loadedImages, setLoadedImages] = useState<{ [key: string]: boolean }>({})
+
   return (
     <section className="max-w-6xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
@@ -50,12 +55,20 @@ export default function ExploreSeasides() {
                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-2"></div>
                   2023 Winner
                 </div>
+                {!loadedImages[destination.image] && (
+                  <Skeleton className="w-full h-[320px] rounded-none" />
+                )}
                 <Image
                   src={destination.image || "/placeholder.svg"}
                   alt={destination.region}
                   width={280}
                   height={320}
-                  className="w-full h-[320px] object-cover transform transition-transform duration-300 group-hover:scale-105"
+                  className={`w-full h-[320px] object-cover transform transition-all duration-300 group-hover:scale-105 ${
+                    loadedImages[destination.image] ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  quality={75}
+                  priority={index === 0}
+                  onLoadingComplete={() => setLoadedImages(prev => ({ ...prev, [destination.image]: true }))}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">

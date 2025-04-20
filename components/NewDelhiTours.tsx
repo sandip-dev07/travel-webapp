@@ -1,10 +1,13 @@
+"use client"
 import Image from "next/image"
 import { Heart, ChevronRight, ChevronLeft, Star } from "lucide-react"
+import { Skeleton } from "./ui/skeleton"
+import { useState } from "react"
 
 const delhiTours = [
   {
     title: "Private Sunrise Taj Mahal Trip from Delhi all Inclusive",
-    image: "/delhi-1.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/delhi-4.jpg?updatedAt=1745140095134",
     rating: 4.9,
     reviews: 1458,
     price: 88,
@@ -13,7 +16,7 @@ const delhiTours = [
   },
   {
     title: "Same Day Taj Mahal, Agra Fort & Baby Taj Tour from Delhi by Car",
-    image: "/delhi-2.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/delhi-2.jpg?updatedAt=1745140054334",
     rating: 4.9,
     reviews: 2787,
     price: 57,
@@ -22,7 +25,7 @@ const delhiTours = [
   },
   {
     title: "New Delhi and Old Delhi Private Full-Day Tour (Rated Excellent)",
-    image: "/delhi-3.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/delhi-3.jpg?updatedAt=1745140054334",
     rating: 4.9,
     reviews: 1369,
     price: 20,
@@ -31,7 +34,7 @@ const delhiTours = [
   },
   {
     title: "Private Same day Jaipur Tour from New Delhi",
-    image: "/delhi-4.jpg",
+    image: "https://ik.imagekit.io/7kmeo4a8z/public/delhi-4.jpg?updatedAt=1745140095134",
     rating: 5.0,
     reviews: 55,
     price: 7,
@@ -41,13 +44,15 @@ const delhiTours = [
 ]
 
 export default function NewDelhiTours() {
+  const [loadedImages, setLoadedImages] = useState<{ [key: string]: boolean }>({})
+
   return (
     <section className="max-w-6xl mx-auto px-4 mb-12">
       <h2 className="text-xl font-bold mb-1">Ways to tour New Delhi</h2>
       <p className="text-sm text-gray-600 mb-4">Book these experiences for a close-up look at New Delhi.</p>
 
       <div className="relative">
-        <div className="flex space-x-5 overflow-x-auto pb-6 -mx-2 px-2">
+        <div className="flex space-x-5 overflow-x-auto pb-6 -mx-2 px-2 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']">
           {delhiTours.map((tour, index) => (
             <div
               key={index}
@@ -55,12 +60,18 @@ export default function NewDelhiTours() {
             >
               <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div className="relative">
+                  {!loadedImages[tour.image] && (
+                    <Skeleton className="w-full h-[200px] rounded-none" />
+                  )}
                   <Image
                     src={tour.image || "/placeholder.svg"}
                     alt={tour.title}
                     width={250}
-                    height={180}
-                    className="w-full h-[180px] object-cover"
+                    height={200}
+                    className={`w-full h-[200px] object-cover transition-opacity duration-300 ${
+                      loadedImages[tour.image] ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    onLoadingComplete={() => setLoadedImages(prev => ({ ...prev, [tour.image]: true }))}
                   />
                   <button className="absolute top-3 right-3 bg-white rounded-full p-1.5 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-110">
                     <Heart className="h-4 w-4 text-gray-500 group-hover:text-gray-700" />
@@ -87,7 +98,7 @@ export default function NewDelhiTours() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <p className="text-xs text-gray-500">from</p>
+                    {/* <p className="text-xs text-gray-500">from</p> */}
                     <p className="text-base font-bold">
                       {tour.currency}
                       {tour.price}
@@ -110,3 +121,4 @@ export default function NewDelhiTours() {
     </section>
   )
 }
+
